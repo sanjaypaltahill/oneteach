@@ -6,29 +6,34 @@
   <title>OneTeach — Learn Anything in Just 1 Minute</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream: #faf7f2;
-      --ink: #0f0e0c;
-      --warm-mid: #3d3730;
-      --gold: #c9a84c;
-      --gold-light: #e8c97a;
-      --terracotta: #c2643f;
-      --sage: #6a8f6e;
-      --off-white: #f3ede3;
-      --card-bg: #ffffff;
-      --shadow: 0 4px 32px rgba(15,14,12,0.08);
-      --radius: 16px;
+      --teal:       #5bbfad;
+      --teal-dark:  #3a9e8c;
+      --teal-light: #e8f7f5;
+      --teal-mid:   #c0e8e2;
+      --teal-dim:   rgba(91,191,173,0.12);
+      --ink:        #111917;
+      --ink2:       #2d3d3a;
+      --muted:      #7a9490;
+      --muted2:     #b0c8c4;
+      --bg:         #f7faf9;
+      --bg2:        #edf4f2;
+      --white:      #ffffff;
+      --orange:     #e07a3a;
+      --radius:     16px;
+      --shadow:     0 4px 32px rgba(17,25,23,0.07);
+      --shadow-lg:  0 12px 60px rgba(17,25,23,0.11);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--cream);
+      font-family: 'Sora', sans-serif;
+      background: var(--bg);
       color: var(--ink);
       overflow-x: hidden;
     }
@@ -37,57 +42,69 @@
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 48px;
-      background: rgba(250,247,242,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 20px 52px;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    nav.scrolled {
+      background: rgba(247,250,249,0.94);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(91,191,173,0.18);
     }
 
     .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      color: var(--ink);
+      font-family: 'Sora', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .logo span { color: var(--gold); }
+    .logo-one   { color: var(--teal); }
+    .logo-teach { color: var(--ink); }
+
+    .logo-icon {
+      width: 34px; height: 34px;
+      background: var(--ink);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
 
     nav ul {
       display: flex;
-      gap: 36px;
+      gap: 28px;
       list-style: none;
+      align-items: center;
     }
 
     nav a {
-      font-size: 0.875rem;
+      font-size: 0.82rem;
       font-weight: 500;
-      color: var(--warm-mid);
+      color: var(--muted);
       text-decoration: none;
-      letter-spacing: 0.02em;
       transition: color 0.2s;
     }
 
-    nav a:hover { color: var(--gold); }
+    nav a:hover { color: var(--teal-dark); }
 
     .nav-cta {
-      background: var(--ink);
-      color: var(--cream) !important;
+      background: var(--ink) !important;
+      color: var(--white) !important;
       padding: 10px 22px;
       border-radius: 100px;
+      font-weight: 600 !important;
       transition: background 0.2s, transform 0.2s !important;
     }
 
-    .nav-cta:hover {
-      background: var(--gold) !important;
-      color: var(--ink) !important;
-      transform: translateY(-1px);
-    }
+    .nav-cta:hover { background: var(--teal-dark) !important; transform: translateY(-1px); }
 
     /* ── HERO ── */
     .hero {
@@ -97,334 +114,379 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 140px 24px 80px;
+      padding: 140px 24px 100px;
       position: relative;
       overflow: hidden;
     }
 
-    .hero-bg {
+    .hero::before {
+      content: '';
       position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 85% 60%, rgba(194,100,63,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 30% 40% at 10% 70%, rgba(106,143,110,0.07) 0%, transparent 60%);
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(91,191,173,0.16) 0%, transparent 65%);
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
     }
 
-    .hero-badge {
+    .rings {
+      position: absolute;
+      width: 560px; height: 560px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -52%);
+      pointer-events: none;
+    }
+
+    .ring {
+      position: absolute;
+      border: 1.5px solid var(--teal);
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: ringPulse 5s ease-in-out infinite;
+      opacity: 0.1;
+    }
+
+    .ring:nth-child(1) { width: 180px; height: 180px; animation-delay: 0s; }
+    .ring:nth-child(2) { width: 300px; height: 300px; animation-delay: 1s; }
+    .ring:nth-child(3) { width: 430px; height: 430px; animation-delay: 2s; }
+    .ring:nth-child(4) { width: 560px; height: 560px; animation-delay: 3s; }
+
+    @keyframes ringPulse {
+      0%, 100% { opacity: 0.06; }
+      50%       { opacity: 0.16; }
+    }
+
+    .hero-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--off-white);
-      border: 1px solid rgba(201,168,76,0.4);
+      background: var(--teal-light);
+      border: 1px solid var(--teal-mid);
       border-radius: 100px;
-      padding: 8px 18px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
+      padding: 7px 16px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 32px;
-      animation: fadeUp 0.7s ease both;
+      color: var(--teal-dark);
+      margin-bottom: 28px;
+      position: relative;
+      animation: fadeUp 0.6s ease both;
     }
 
-    .hero-badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
+    .dot {
+      width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--gold);
-      animation: pulse 2s ease infinite;
+      background: var(--teal);
+      animation: blink 2s ease infinite;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.4); }
-    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
     h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 8vw, 6.5rem);
-      font-weight: 900;
-      line-height: 1.0;
-      letter-spacing: -0.03em;
+      font-family: 'Lora', serif;
+      font-size: clamp(3.2rem, 8vw, 6.8rem);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -0.035em;
       color: var(--ink);
-      max-width: 900px;
+      max-width: 860px;
       margin-bottom: 12px;
-      animation: fadeUp 0.7s 0.1s ease both;
+      position: relative;
+      animation: fadeUp 0.6s 0.1s ease both;
     }
 
-    h1 em {
-      font-style: italic;
-      color: var(--gold);
-    }
+    h1 em { font-style: italic; color: var(--teal); }
 
     .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      color: var(--warm-mid);
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      color: var(--muted);
       font-weight: 300;
-      max-width: 560px;
-      line-height: 1.7;
-      margin-bottom: 48px;
-      animation: fadeUp 0.7s 0.2s ease both;
+      max-width: 580px;
+      line-height: 1.8;
+      margin-bottom: 44px;
+      position: relative;
+      animation: fadeUp 0.6s 0.2s ease both;
     }
+
+    .hero-sub strong { color: var(--ink2); font-weight: 600; }
 
     .hero-actions {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
       justify-content: center;
-      animation: fadeUp 0.7s 0.3s ease both;
+      position: relative;
+      animation: fadeUp 0.6s 0.3s ease both;
     }
 
     .btn-primary {
-      background: var(--ink);
-      color: var(--cream);
-      padding: 16px 36px;
+      background: var(--teal);
+      color: var(--white);
+      padding: 15px 34px;
       border-radius: 100px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 500;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
       text-decoration: none;
-      transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 24px rgba(15,14,12,0.18);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(91,191,173,0.35);
+      letter-spacing: -0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .btn-primary:hover {
-      background: var(--gold);
-      color: var(--ink);
+      background: var(--teal-dark);
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+      box-shadow: 0 8px 36px rgba(91,191,173,0.4);
     }
 
-    .btn-secondary {
+    .btn-ghost {
       background: transparent;
       color: var(--ink);
-      padding: 16px 36px;
+      padding: 15px 34px;
       border-radius: 100px;
-      border: 1.5px solid rgba(15,14,12,0.2);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem;
+      border: 1.5px solid rgba(17,25,23,0.15);
+      font-family: 'Sora', sans-serif;
+      font-size: 0.9rem;
       font-weight: 500;
       text-decoration: none;
       transition: border-color 0.2s, color 0.2s, transform 0.2s;
     }
 
-    .btn-secondary:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      transform: translateY(-2px);
-    }
+    .btn-ghost:hover { border-color: var(--teal); color: var(--teal-dark); transform: translateY(-2px); }
 
-    /* minute card */
-    .minute-visual {
-      margin-top: 72px;
-      position: relative;
-      animation: fadeUp 0.7s 0.45s ease both;
-    }
-
-    .minute-card {
-      background: var(--card-bg);
-      border-radius: 24px;
-      box-shadow: 0 24px 80px rgba(15,14,12,0.12);
-      width: 340px;
-      overflow: hidden;
-      display: inline-block;
-    }
-
-    .video-thumb {
-      background: linear-gradient(135deg, #1a1512 0%, #2e2620 100%);
-      height: 190px;
-      position: relative;
+    /* social proof strip */
+    .social-proof {
+      margin-top: 56px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-    }
-
-    .video-thumb::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, rgba(201,168,76,0.1) 0%, transparent 70%);
-    }
-
-    .play-btn {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      gap: 14px;
+      animation: fadeUp 0.6s 0.4s ease both;
       position: relative;
-      z-index: 1;
-      transition: transform 0.2s;
     }
 
-    .play-btn:hover { transform: scale(1.1); cursor: pointer; }
-
-    .play-btn svg { margin-left: 4px; }
-
-    .duration-badge {
-      position: absolute;
-      top: 12px; right: 12px;
-      background: var(--gold);
-      color: var(--ink);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      padding: 4px 10px;
-      border-radius: 100px;
-      z-index: 1;
-    }
-
-    .card-body {
-      padding: 20px 22px 22px;
-    }
-
-    .card-tag {
-      font-size: 0.7rem;
+    .proof-label {
+      font-size: 0.72rem;
       font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--sage);
-      margin-bottom: 6px;
+      color: var(--muted2);
     }
 
-    .card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
+    .flags {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 500px;
+      align-items: center;
+    }
+
+    .flag { font-size: 1.5rem; transition: transform 0.2s; cursor: default; }
+    .flag:hover { transform: scale(1.2); }
+
+    /* ── MANIFESTO ── */
+    .manifesto { background: var(--ink); }
+
+    .manifesto-inner { display: flex; align-items: stretch; }
+
+    .manifesto-text { padding: 72px 64px; flex: 1; }
+
+    .manifesto-text h2 {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.7rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+
+    .manifesto-text h2 em { font-style: italic; color: var(--teal); }
+
+    .manifesto-text p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+      max-width: 480px;
+    }
+
+    .manifesto-stat {
+      background: var(--teal);
+      padding: 72px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 280px;
+    }
+
+    .manifesto-stat-num {
+      font-family: 'Lora', serif;
+      font-size: 4.5rem;
       font-weight: 700;
       color: var(--ink);
-      line-height: 1.3;
+      letter-spacing: -0.04em;
+      line-height: 1;
     }
 
-    .progress-bar {
-      margin-top: 14px;
-      height: 3px;
-      background: var(--off-white);
-      border-radius: 100px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 60%;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
-      border-radius: 100px;
-      animation: progressAnim 2s 1.2s ease both;
-    }
-
-    @keyframes progressAnim {
-      from { width: 0%; }
-      to { width: 60%; }
-    }
-
-    /* floating chips */
-    .chips {
-      position: absolute;
-      pointer-events: none;
-    }
-
-    .chip {
-      position: absolute;
-      background: var(--card-bg);
-      border-radius: 100px;
-      padding: 8px 16px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      box-shadow: 0 4px 20px rgba(15,14,12,0.1);
-      white-space: nowrap;
-      animation: float 3s ease-in-out infinite alternate;
-    }
-
-    .chip-1 { top: 20px; left: -130px; animation-delay: 0s; color: var(--terracotta); }
-    .chip-2 { top: 80px; right: -140px; animation-delay: 0.8s; color: var(--sage); }
-    .chip-3 { bottom: 40px; left: -110px; animation-delay: 1.5s; color: var(--gold); }
-
-    @keyframes float {
-      from { transform: translateY(0px); }
-      to { transform: translateY(-8px); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
+    .manifesto-stat-label {
+      font-size: 0.88rem;
+      color: rgba(17,25,23,0.65);
+      font-weight: 400;
+      margin-top: 10px;
+      line-height: 1.55;
     }
 
     /* ── STATS ── */
-    .stats {
-      background: var(--ink);
-      padding: 64px 48px;
-      display: flex;
-      justify-content: center;
-      gap: 80px;
-      flex-wrap: wrap;
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--white);
+      border-bottom: 1px solid var(--teal-mid);
     }
 
-    .stat {
-      text-align: center;
+    .stat-cell {
+      padding: 48px 40px;
+      border-right: 1px solid var(--teal-mid);
+      transition: background 0.25s;
     }
+
+    .stat-cell:last-child { border-right: none; }
+    .stat-cell:hover { background: var(--teal-light); }
 
     .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 900;
-      color: var(--gold);
-      letter-spacing: -0.03em;
+      font-family: 'Lora', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      letter-spacing: -0.04em;
       line-height: 1;
       margin-bottom: 8px;
     }
 
-    .stat-label {
-      font-size: 0.85rem;
-      font-weight: 400;
-      color: rgba(250,247,242,0.55);
-      letter-spacing: 0.04em;
-    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); font-weight: 400; line-height: 1.5; }
 
-    /* ── HOW IT WORKS ── */
-    section {
-      padding: 100px 48px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    /* ── SHARED SECTION ── */
+    .section { max-width: 1080px; margin: 0 auto; padding: 100px 48px; }
 
     .section-label {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
+      color: var(--teal);
+      margin-bottom: 14px;
     }
 
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
       color: var(--ink);
-      max-width: 600px;
-      margin-bottom: 60px;
+      max-width: 620px;
+      margin-bottom: 52px;
     }
 
-    .section-title em { color: var(--gold); font-style: italic; }
+    .section-title em { font-style: italic; color: var(--teal); }
 
+    /* ── THE GAP SECTION ── */
+    .gap-section { background: var(--bg2); border-top: 1px solid var(--teal-mid); border-bottom: 1px solid var(--teal-mid); }
+
+    .gap-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .gap-text p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 18px;
+    }
+
+    .gap-text p strong { color: var(--ink); font-weight: 600; }
+    .gap-text p em { color: var(--teal-dark); font-style: normal; font-weight: 500; }
+
+    .gap-cards { display: flex; flex-direction: column; gap: 14px; }
+
+    .gap-card {
+      background: var(--white);
+      border: 1px solid var(--teal-mid);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .gap-card:hover { border-color: var(--teal); transform: translateX(4px); }
+
+    .gap-card-icon { font-size: 1.6rem; flex-shrink: 0; }
+
+    .gap-card h4 { font-size: 0.88rem; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+
+    .gap-card p { font-size: 0.8rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
+
+    /* ── GEN Z SECTION ── */
+    .genz-section { background: var(--white); border-bottom: 1px solid var(--teal-mid); }
+
+    .genz-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .genz-card {
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      border: 1.5px solid var(--teal-mid);
+      background: var(--bg);
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+
+    .genz-card:hover { border-color: var(--teal); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .genz-card:first-child { background: var(--teal-light); border-color: var(--teal); }
+
+    .genz-icon { font-size: 2.2rem; margin-bottom: 16px; }
+
+    .genz-stat {
+      font-family: 'Lora', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+
+    .genz-card h3 { font-size: 0.95rem; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+    .genz-card p  { font-size: 0.82rem; color: var(--muted); font-weight: 300; line-height: 1.65; }
+
+    /* ── HOW IT WORKS ── */
     .steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
     }
 
     .step {
-      background: var(--card-bg);
+      background: var(--white);
+      border: 1px solid var(--teal-mid);
       border-radius: var(--radius);
-      padding: 36px 32px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(201,168,76,0.08);
-      transition: transform 0.25s, box-shadow 0.25s;
+      padding: 36px 28px;
+      transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
       position: relative;
       overflow: hidden;
     }
@@ -434,653 +496,954 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      background: linear-gradient(90deg, var(--teal), var(--teal-dark));
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform 0.35s ease;
+      transition: transform 0.3s ease;
     }
 
-    .step:hover { transform: translateY(-4px); box-shadow: 0 12px 48px rgba(15,14,12,0.12); }
+    .step:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: var(--teal); }
     .step:hover::before { transform: scaleX(1); }
 
-    .step-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 900;
-      color: rgba(201,168,76,0.15);
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-
-    .step-icon {
-      font-size: 1.8rem;
-      margin-bottom: 16px;
-    }
-
-    .step h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: var(--ink);
-    }
-
-    .step p {
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: var(--warm-mid);
-      font-weight: 300;
-    }
+    .step-num { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; color: var(--teal); margin-bottom: 20px; }
+    .step-icon { font-size: 2rem; margin-bottom: 14px; }
+    .step h3 { font-family: 'Lora', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+    .step p { font-size: 0.85rem; line-height: 1.7; color: var(--muted); font-weight: 300; }
 
     /* ── TOPICS ── */
-    .topics-section {
-      background: var(--off-white);
-      padding: 100px 0;
-    }
+    .topics-section { background: var(--bg2); border-top: 1px solid var(--teal-mid); border-bottom: 1px solid var(--teal-mid); }
 
-    .topics-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 48px;
-    }
+    .topics-flow { display: flex; flex-wrap: wrap; gap: 10px; }
 
-    .topics-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .topic-pill {
-      background: var(--card-bg);
+    .topic {
+      background: var(--white);
+      border: 1.5px solid var(--teal-mid);
       border-radius: 100px;
-      padding: 12px 24px;
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--warm-mid);
-      border: 1px solid rgba(15,14,12,0.08);
-      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+      padding: 10px 20px;
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--muted);
+      transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
       cursor: default;
     }
 
-    .topic-pill:hover {
-      background: var(--ink);
-      color: var(--gold);
-      border-color: var(--ink);
-      transform: translateY(-2px);
-    }
+    .topic:hover { background: var(--teal-light); border-color: var(--teal); color: var(--teal-dark); transform: translateY(-2px); }
+    .topic.hi { background: var(--teal-light); border-color: var(--teal); color: var(--teal-dark); font-weight: 600; }
 
-    .topic-pill.featured {
-      background: var(--gold);
-      color: var(--ink);
-      border-color: var(--gold);
-      font-weight: 600;
-    }
+    /* ── FOUNDER ── */
+    .founder-section { background: var(--white); }
 
-    /* ── MISSION ── */
-    .mission-grid {
+    .founder-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 72px;
       align-items: center;
     }
 
-    @media (max-width: 768px) {
-      .mission-grid { grid-template-columns: 1fr; }
+    .founder-visual {
+      position: relative;
     }
 
-    .mission-text p {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: var(--warm-mid);
-      font-weight: 300;
-      margin-bottom: 20px;
+    .founder-avatar {
+      width: 100%;
+      aspect-ratio: 1;
+      max-width: 340px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--teal-light) 0%, var(--teal-mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid var(--teal-mid);
     }
 
-    .mission-text p strong {
-      color: var(--ink);
-      font-weight: 500;
-    }
-
-    .mission-visual {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .mission-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-      box-shadow: var(--shadow);
-      text-align: center;
-    }
-
-    .mission-card:first-child {
-      grid-column: 1 / -1;
+    .founder-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
       background: var(--ink);
-      color: var(--cream);
-    }
-
-    .mission-card-icon { font-size: 2rem; margin-bottom: 10px; }
-
-    .mission-card-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--gold);
-    }
-
-    .mission-card-label {
-      font-size: 0.8rem;
-      font-weight: 400;
-      opacity: 0.6;
-      margin-top: 4px;
-    }
-
-    .mission-card:first-child .mission-card-label { color: var(--cream); }
-
-    /* ── PRICING ── */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      max-width: 900px;
-    }
-
-    .price-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 40px 36px;
-      box-shadow: var(--shadow);
-      border: 1.5px solid rgba(15,14,12,0.07);
-      transition: transform 0.25s;
-    }
-
-    .price-card:hover { transform: translateY(-4px); }
-
-    .price-card.featured {
-      background: var(--ink);
-      color: var(--cream);
-      border-color: var(--ink);
-    }
-
-    .price-tag {
-      font-size: 0.72rem;
+      color: var(--white);
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-size: 0.78rem;
       font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px;
+      line-height: 1.4;
+      box-shadow: var(--shadow-lg);
     }
 
-    .price-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
+    .founder-badge span { color: var(--teal); display: block; font-size: 0.68rem; font-weight: 500; margin-top: 2px; }
 
-    .price-card.featured .price-name { color: var(--cream); }
+    .founder-text {}
 
-    .price-amount {
-      font-size: 2.8rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      color: var(--gold);
-      line-height: 1;
-      margin: 20px 0 8px;
-    }
-
-    .price-period {
-      font-size: 0.85rem;
-      color: var(--warm-mid);
+    .founder-text blockquote {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      font-weight: 600;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.45;
+      border-left: 3px solid var(--teal);
+      padding-left: 24px;
       margin-bottom: 28px;
     }
 
-    .price-card.featured .price-period { color: rgba(250,247,242,0.55); }
-
-    .price-features {
-      list-style: none;
-      margin-bottom: 32px;
+    .founder-text p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 16px;
     }
 
-    .price-features li {
-      font-size: 0.875rem;
-      font-weight: 300;
-      padding: 9px 0;
-      border-bottom: 1px solid rgba(15,14,12,0.06);
+    .founder-text p strong { color: var(--ink); font-weight: 600; }
+
+    .founder-name {
+      margin-top: 24px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      color: var(--warm-mid);
+      gap: 12px;
     }
 
-    .price-card.featured .price-features li {
-      color: rgba(250,247,242,0.75);
-      border-bottom-color: rgba(250,247,242,0.08);
+    .founder-name-text { font-size: 0.9rem; font-weight: 700; color: var(--ink); }
+    .founder-name-sub { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
+
+    /* ── OUTCOMES ── */
+    .outcomes-section { background: var(--ink); }
+
+    .outcomes-inner { max-width: 1080px; margin: 0 auto; padding: 100px 48px; }
+
+    .outcomes-inner .section-label { color: var(--teal); }
+    .outcomes-inner .section-title { color: var(--white); }
+
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
 
-    .price-features li::before {
-      content: '✓';
-      color: var(--gold);
+    .outcome-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(91,191,173,0.2);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .outcome-card:hover { background: rgba(91,191,173,0.08); border-color: rgba(91,191,173,0.4); }
+
+    .outcome-icon { font-size: 2rem; margin-bottom: 16px; }
+
+    .outcome-card h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
       font-weight: 700;
-      font-size: 0.8rem;
-      flex-shrink: 0;
+      color: var(--white);
+      margin-bottom: 10px;
     }
 
-    .btn-price {
+    .outcome-card p { font-size: 0.85rem; color: rgba(255,255,255,0.5); font-weight: 300; line-height: 1.7; }
+
+    /* ── CONSULT ── */
+    .consult-section { background: var(--bg); }
+
+    .consult-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .consult-info {}
+
+    .consult-info p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .consult-info p strong { color: var(--ink); font-weight: 600; }
+    .consult-info p .teal  { color: var(--teal-dark); font-weight: 500; }
+
+    .services {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .service {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 18px;
+      background: var(--white);
+      border: 1px solid var(--teal-mid);
+      border-radius: 12px;
+      transition: border-color 0.2s;
+    }
+
+    .service:hover { border-color: var(--teal); }
+
+    .service-icon { font-size: 1.3rem; flex-shrink: 0; }
+
+    .service-text h4 { font-size: 0.88rem; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+    .service-text p  { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
+
+    /* FORM */
+    .consult-form {
+      background: var(--white);
+      border: 1.5px solid var(--teal-mid);
+      border-radius: 20px;
+      padding: 40px 36px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-title {
+      font-family: 'Lora', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .form-subtitle {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--ink2);
+      letter-spacing: 0.02em;
+    }
+
+    input, select, textarea {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--ink);
+      background: var(--bg);
+      border: 1.5px solid var(--teal-mid);
+      border-radius: 10px;
+      padding: 11px 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
       width: 100%;
-      padding: 14px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(91,191,173,0.15);
+    }
+
+    textarea { resize: vertical; min-height: 100px; }
+
+    select { appearance: none; cursor: pointer; }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 16px;
+      background: #fff8f0;
+      border: 1.5px solid #f0d5b8;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: 18px; height: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      accent-color: var(--teal);
+      cursor: pointer;
+    }
+
+    .checkbox-label {
+      font-size: 0.82rem;
+      color: var(--ink2);
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .checkbox-label strong { color: var(--orange); }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--teal);
+      color: var(--white);
+      border: none;
+      padding: 14px 24px;
       border-radius: 100px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Sora', sans-serif;
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(91,191,173,0.3);
+    }
+
+    .btn-submit:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: 0 6px 28px rgba(91,191,173,0.4); }
+
+    .form-note {
+      margin-top: 12px;
+      font-size: 0.72rem;
+      color: var(--muted2);
       text-align: center;
-      text-decoration: none;
-      display: block;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
+      line-height: 1.5;
     }
 
-    .btn-price-light {
-      background: var(--off-white);
+    /* success state */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .form-success .success-icon { font-size: 3rem; margin-bottom: 16px; }
+
+    .form-success h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
       color: var(--ink);
-      border: 1.5px solid rgba(15,14,12,0.12);
+      margin-bottom: 10px;
     }
 
-    .btn-price-light:hover {
-      background: var(--ink);
-      color: var(--gold);
-      border-color: var(--ink);
-    }
+    .form-success p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
 
-    .btn-price-dark {
-      background: var(--gold);
-      color: var(--ink);
-    }
-
-    .btn-price-dark:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
-    }
-
-    /* ── CTA BANNER ── */
-    .cta-banner {
-      background: var(--ink);
+    /* ── CTA ── */
+    .cta-section {
       margin: 0 48px 80px;
       border-radius: 24px;
-      padding: 80px 64px;
+      background: var(--ink);
+      padding: 88px 64px;
       text-align: center;
       position: relative;
       overflow: hidden;
     }
 
-    .cta-banner::before {
+    .cta-section::before {
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 60% 80% at 20% 50%, rgba(201,168,76,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 80% 50%, rgba(194,100,63,0.08) 0%, transparent 60%);
+      background: radial-gradient(ellipse 70% 80% at 50% 0%, rgba(91,191,173,0.18) 0%, transparent 65%);
+      pointer-events: none;
     }
 
-    .cta-banner h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 900;
-      color: var(--cream);
-      letter-spacing: -0.02em;
+    .cta-section h2 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      line-height: 1.12;
       margin-bottom: 16px;
       position: relative;
     }
 
-    .cta-banner h2 em { color: var(--gold); }
+    .cta-section h2 em { font-style: italic; color: var(--teal); }
 
-    .cta-banner p {
-      color: rgba(250,247,242,0.6);
+    .cta-section p {
+      color: rgba(255,255,255,0.5);
       font-size: 1rem;
       font-weight: 300;
-      max-width: 480px;
+      max-width: 440px;
       margin: 0 auto 36px;
+      line-height: 1.7;
       position: relative;
     }
 
-    .cta-banner .btn-primary {
-      position: relative;
-      background: var(--gold);
-      color: var(--ink);
-    }
+    .cta-section .btn-primary { position: relative; }
 
-    .cta-banner .btn-primary:hover {
-      background: var(--gold-light);
-    }
+    .cta-free-note { margin-top: 16px; font-size: 0.78rem; color: rgba(255,255,255,0.28); position: relative; }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--ink);
-      border-top: 1px solid rgba(250,247,242,0.06);
-      padding: 48px;
+      border-top: 1px solid var(--teal-mid);
+      background: var(--white);
+      padding: 44px 52px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: gap;
+      flex-wrap: wrap;
       gap: 24px;
     }
 
-    .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 900;
-      color: var(--cream);
-      text-decoration: none;
-    }
+    .footer-logo { font-size: 1.1rem; font-weight: 800; text-decoration: none; letter-spacing: -0.03em; }
 
-    .footer-logo span { color: var(--gold); }
+    .footer-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; }
 
-    .footer-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-      flex-wrap: wrap;
-    }
+    .footer-links a { font-size: 0.8rem; color: var(--muted2); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--teal-dark); }
 
-    .footer-links a {
-      font-size: 0.82rem;
-      color: rgba(250,247,242,0.45);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
+    .footer-copy { font-size: 0.75rem; color: var(--muted2); }
 
-    .footer-links a:hover { color: var(--gold); }
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .footer-copy {
-      font-size: 0.8rem;
-      color: rgba(250,247,242,0.25);
-    }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       nav { padding: 16px 24px; }
       nav ul { display: none; }
-      section { padding: 72px 24px; }
-      .stats { padding: 48px 24px; gap: 40px; }
-      .cta-banner { margin: 0 24px 64px; padding: 56px 32px; }
+      .section { padding: 72px 24px; }
+      .outcomes-inner { padding: 72px 24px; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .stat-cell { border-right: none; border-bottom: 1px solid var(--teal-mid); }
+      .gap-grid, .founder-grid, .consult-grid, .mission-grid { grid-template-columns: 1fr; gap: 40px; }
+      .genz-grid, .outcomes-grid { grid-template-columns: 1fr; }
+      .manifesto-inner { flex-direction: column; }
+      .manifesto-stat { min-width: auto; }
+      .manifesto-text, .manifesto-stat { padding: 48px 32px; }
+      .cta-section { margin: 0 24px 64px; padding: 56px 28px; }
       footer { padding: 36px 24px; flex-direction: column; align-items: flex-start; }
-      .chip { display: none; }
-      .topics-inner { padding: 0 24px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-row { grid-template-columns: 1fr; }
+      h1 { font-size: 2.8rem; }
     }
   </style>
 </head>
 <body>
 
   <!-- NAV -->
-  <nav>
-    <a href="#" class="logo">One<span>Teach</span></a>
+  <nav id="nav">
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3C9.5 3 7.5 4.5 6.5 6.5C5 6.2 3.5 7.2 3 8.7C2 9 1 10.2 1 11.5C1 13.2 2.3 14.5 4 14.5H4.5C4.2 15 4 15.7 4 16.5C4 18.4 5.6 20 7.5 20C7.8 20 8.1 20 8.4 19.9C9 21.1 10.2 22 11.5 22H12.5C13.8 22 15 21.1 15.6 19.9C15.9 20 16.2 20 16.5 20C18.4 20 20 18.4 20 16.5C20 15.7 19.8 15 19.5 14.5H20C21.7 14.5 23 13.2 23 11.5C23 10.2 22 9 21 8.7C20.5 7.2 19 6.2 17.5 6.5C16.5 4.5 14.5 3 12 3Z" fill="#5bbfad"/>
+        </svg>
+      </div>
+      <span><span class="logo-one">One</span><span class="logo-teach">Teach</span></span>
+    </a>
     <ul>
-      <li><a href="#how">How it Works</a></li>
-      <li><a href="#topics">Topics</a></li>
-      <li><a href="#mission">Mission</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#start" class="nav-cta">Get Started</a></li>
+      <li><a href="#gap">The Problem</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#founder">About</a></li>
+      <li><a href="#consult">Get Help</a></li>
+      <li><a href="#start" class="nav-cta">Start Learning</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
-  <div class="hero">
-    <div class="hero-bg"></div>
+  <section class="hero">
+    <div class="rings">
+      <div class="ring"></div><div class="ring"></div>
+      <div class="ring"></div><div class="ring"></div>
+    </div>
 
-    <div class="hero-badge">Now available globally</div>
+    <div class="hero-eyebrow">
+      <div class="dot"></div>
+      100% free · No account required
+    </div>
 
-    <h1>Learn <em>anything</em><br>in just 1 minute.</h1>
+    <h1>Your path to the top<br>starts with <em>one minute.</em></h1>
+
     <p class="hero-sub">
-      OneTeach delivers bite-sized, expert-crafted video lessons that make world-class education accessible to everyone — anywhere, anytime, for free.
+      OneTeach delivers expert-crafted, one-minute video lessons on every subject — completely free. <strong>Whether you're in Lagos or Los Angeles</strong>, elite education is no longer out of reach.
     </p>
 
     <div class="hero-actions">
-      <a href="#start" class="btn-primary">Start Learning Free</a>
-      <a href="#how" class="btn-secondary">See How It Works</a>
+      <a href="#start" class="btn-primary">Start Learning Free →</a>
+      <a href="#consult" class="btn-ghost">Work With Sanjay</a>
     </div>
 
-    <div class="minute-visual">
-      <div class="chips">
-        <div class="chip chip-1">🧬 Biology</div>
-        <div class="chip chip-2">📐 Geometry</div>
-        <div class="chip chip-3">🌍 History</div>
+    <div class="social-proof">
+      <div class="proof-label">Reaching learners in 150+ countries</div>
+      <div class="flags">
+        <span class="flag">🇳🇬</span>
+        <span class="flag">🇮🇳</span>
+        <span class="flag">🇧🇷</span>
+        <span class="flag">🇮🇩</span>
+        <span class="flag">🇰🇪</span>
+        <span class="flag">🇵🇭</span>
+        <span class="flag">🇲🇽</span>
+        <span class="flag">🇧🇩</span>
+        <span class="flag">🇪🇹</span>
+        <span class="flag">🇺🇸</span>
+        <span class="flag">🇻🇳</span>
+        <span class="flag">🇬🇭</span>
+        <span style="font-size:0.78rem; color:var(--muted2); align-self:center;">+140 more</span>
       </div>
-      <div class="minute-card">
-        <div class="video-thumb">
-          <div class="duration-badge">1:00</div>
-          <div class="play-btn">
-            <svg width="18" height="20" viewBox="0 0 18 20" fill="none">
-              <path d="M1 1L17 10L1 19V1Z" fill="#0f0e0c"/>
-            </svg>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="card-tag">Physics · Lesson 4</div>
-          <div class="card-title">Why does light bend through glass?</div>
-          <div class="progress-bar">
-            <div class="progress-fill"></div>
-          </div>
-        </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <div class="manifesto">
+    <div class="manifesto-inner">
+      <div class="manifesto-text">
+        <h2>A great education<br>shouldn't depend on<br><em>where you were born.</em></h2>
+        <p>The world's best opportunities — top universities, competitive careers, financial freedom — are supposed to be earned on merit. But access to the preparation needed to get there? That's still determined by your zip code and your parents' income. OneTeach exists to break that open.</p>
+      </div>
+      <div class="manifesto-stat">
+        <div class="manifesto-stat-num">2B+</div>
+        <div class="manifesto-stat-label">people worldwide without meaningful access to quality education. We're building for them first.</div>
       </div>
     </div>
   </div>
 
   <!-- STATS -->
-  <div class="stats">
-    <div class="stat">
+  <div class="stats-row reveal">
+    <div class="stat-cell">
       <div class="stat-num">1,200+</div>
-      <div class="stat-label">One-Minute Lessons</div>
+      <div class="stat-label">Free one-minute lessons, every subject</div>
     </div>
-    <div class="stat">
+    <div class="stat-cell">
       <div class="stat-num">80+</div>
-      <div class="stat-label">Subjects Covered</div>
+      <div class="stat-label">Subjects, from algebra to zoology</div>
     </div>
-    <div class="stat">
+    <div class="stat-cell">
       <div class="stat-num">150+</div>
-      <div class="stat-label">Countries Reached</div>
+      <div class="stat-label">Countries reached and growing</div>
     </div>
-    <div class="stat">
-      <div class="stat-num">Free</div>
-      <div class="stat-label">Always, For Everyone</div>
+    <div class="stat-cell">
+      <div class="stat-num">$0</div>
+      <div class="stat-label">Cost to any learner. Always. Forever.</div>
+    </div>
+  </div>
+
+  <!-- THE GAP -->
+  <div class="gap-section" id="gap">
+    <div class="section">
+      <div class="reveal">
+        <div class="section-label">The Problem We're Solving</div>
+        <h2 class="section-title">The education gap is real — <em>even in America.</em></h2>
+      </div>
+      <div class="gap-grid">
+        <div class="gap-text reveal">
+          <p>It's easy to think the education access problem is somewhere else. <strong>It isn't.</strong> In the United States today, a student's chance of attending a top university is still strongly predicted by their parents' income — not their raw ability or drive.</p>
+          <p>First-generation students, low-income families, and underserved communities lack access to the tutors, test prep, essay coaches, and enrichment programs that wealthy peers take for granted. <em>The playing field was never level.</em></p>
+          <p>Globally, the picture is starker. Across Sub-Saharan Africa, Southeast Asia, and South Asia, hundreds of millions of brilliant young people simply have no path to quality instruction — not because they don't want it, but because the infrastructure was never built for them.</p>
+          <p><strong>OneTeach is our answer.</strong> One minute at a time, we're putting the world's knowledge in everyone's pocket.</p>
+        </div>
+        <div class="gap-cards reveal">
+          <div class="gap-card">
+            <div class="gap-card-icon">🇺🇸</div>
+            <div>
+              <h4>The US Opportunity Gap</h4>
+              <p>Students from high-income families are 8× more likely to graduate from a top university than equally talented peers from low-income households.</p>
+            </div>
+          </div>
+          <div class="gap-card">
+            <div class="gap-card-icon">🌍</div>
+            <div>
+              <h4>The Global Learning Crisis</h4>
+              <p>UNESCO estimates 763 million adults worldwide are illiterate. Hundreds of millions more have access to school but not to quality instruction.</p>
+            </div>
+          </div>
+          <div class="gap-card">
+            <div class="gap-card-icon">📵</div>
+            <div>
+              <h4>Paywalls Punish the Poorest</h4>
+              <p>The best online learning platforms cost $20–$200/month — more than many families in developing economies earn in a week.</p>
+            </div>
+          </div>
+          <div class="gap-card">
+            <div class="gap-card-icon">✊</div>
+            <div>
+              <h4>Merit Should Win</h4>
+              <p>Every kid who's driven, curious, and willing to work hard deserves a shot at the top — regardless of their background. We're here to give it to them.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GEN Z + SHORT FORM -->
+  <div class="genz-section">
+    <div class="section">
+      <div class="reveal">
+        <div class="section-label">Built for How Today's Learners Actually Learn</div>
+        <h2 class="section-title">Short-form is the <em>future of learning.</em></h2>
+      </div>
+      <div class="genz-grid reveal">
+        <div class="genz-card">
+          <div class="genz-icon">⚡</div>
+          <div class="genz-stat">8 sec</div>
+          <h3>The Modern Attention Span</h3>
+          <p>Today's learners grew up on TikTok, YouTube Shorts, and Reels. Attention is precious. We don't fight that — we design for it. One idea, one minute, done.</p>
+        </div>
+        <div class="genz-card">
+          <div class="genz-icon">🧠</div>
+          <div class="genz-stat">2×</div>
+          <h3>Better Retention, Science Says</h3>
+          <p>Focused micro-learning combined with retrieval practice produces up to 2× the retention of traditional passive lecture formats. Our lessons are built on this research.</p>
+        </div>
+        <div class="genz-card">
+          <div class="genz-icon">📲</div>
+          <div class="genz-stat">85%</div>
+          <h3>Gen Z Learns on Their Phone</h3>
+          <p>85% of Gen Z uses mobile as their primary screen. OneTeach is mobile-first, low-bandwidth, and works on any device — even in low connectivity areas.</p>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- HOW IT WORKS -->
-  <section id="how">
+  <div class="section" id="how">
     <div class="reveal">
       <div class="section-label">How It Works</div>
-      <h2 class="section-title">One minute is all it<br>takes to <em>get it.</em></h2>
+      <h2 class="section-title">One minute.<br>Real understanding.</h2>
     </div>
-    <div class="steps">
-      <div class="step reveal">
-        <div class="step-num">01</div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">STEP 01</div>
         <div class="step-icon">🔍</div>
-        <h3>Pick a Topic</h3>
-        <p>Browse hundreds of subjects — from algebra and chemistry to history, coding, and economics. No signup required to explore.</p>
+        <h3>Choose Any Topic</h3>
+        <p>Browse 80+ subjects freely. No account needed to start. Just bring your curiosity.</p>
       </div>
-      <div class="step reveal">
-        <div class="step-num">02</div>
+      <div class="step">
+        <div class="step-num">STEP 02</div>
         <div class="step-icon">▶️</div>
-        <h3>Watch in 60 Seconds</h3>
-        <p>Every lesson is exactly one minute. Concise, expert-made, and beautifully designed to make concepts click fast.</p>
+        <h3>Watch 60 Seconds</h3>
+        <p>Expert-crafted, visually engaging lessons. Dense with insight, zero filler.</p>
       </div>
-      <div class="step reveal">
-        <div class="step-num">03</div>
-        <div class="step-icon">🧠</div>
-        <h3>Test Yourself</h3>
-        <p>After each video, a quick question locks in the concept. Learning science shows retrieval practice doubles retention.</p>
+      <div class="step">
+        <div class="step-num">STEP 03</div>
+        <div class="step-icon">✅</div>
+        <h3>Test Your Recall</h3>
+        <p>A quick question after each video locks the concept in. Retrieval practice doubles retention.</p>
       </div>
-      <div class="step reveal">
-        <div class="step-num">04</div>
+      <div class="step">
+        <div class="step-num">STEP 04</div>
         <div class="step-icon">📈</div>
-        <h3>Build Knowledge</h3>
-        <p>Follow curated learning paths through any subject. Stack lessons into real, lasting understanding — minute by minute.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- TOPICS -->
-  <div class="topics-section">
-    <div class="topics-inner">
-      <div class="reveal">
-        <div class="section-label">What You'll Learn</div>
-        <h2 class="section-title">Every subject.<br><em>Every level.</em></h2>
-      </div>
-      <div class="topics-grid reveal">
-        <div class="topic-pill featured">⚗️ Chemistry</div>
-        <div class="topic-pill">📐 Mathematics</div>
-        <div class="topic-pill">🌍 World History</div>
-        <div class="topic-pill featured">💻 Programming</div>
-        <div class="topic-pill">🧬 Biology</div>
-        <div class="topic-pill">🌌 Astronomy</div>
-        <div class="topic-pill">💰 Personal Finance</div>
-        <div class="topic-pill featured">⚡ Physics</div>
-        <div class="topic-pill">🗣️ Languages</div>
-        <div class="topic-pill">🎨 Art History</div>
-        <div class="topic-pill">📊 Economics</div>
-        <div class="topic-pill">🏛️ Philosophy</div>
-        <div class="topic-pill">🌱 Environmental Science</div>
-        <div class="topic-pill featured">🧠 Psychology</div>
-        <div class="topic-pill">🎵 Music Theory</div>
-        <div class="topic-pill">🏥 Health & Medicine</div>
-        <div class="topic-pill">⚖️ Law & Civics</div>
-        <div class="topic-pill">🚀 Engineering</div>
+        <h3>Build & Stack</h3>
+        <p>Follow curated paths through any subject. Stack minutes into deep, lasting mastery.</p>
       </div>
     </div>
   </div>
 
-  <!-- MISSION -->
-  <section id="mission">
-    <div class="reveal">
-      <div class="section-label">Our Mission</div>
-      <h2 class="section-title">Education is a<br><em>right</em>, not a privilege.</h2>
-    </div>
-    <div class="mission-grid">
-      <div class="mission-text reveal">
-        <p>
-          <strong>Two billion people lack meaningful access to quality education.</strong> Not because they aren't curious or capable — but because books are expensive, schools are overcrowded, and internet data is scarce.
-        </p>
-        <p>
-          OneTeach was built to change that. Our one-minute lessons are lightweight, low-bandwidth, and free. Optimized for the phone in your pocket, wherever you are in the world.
-        </p>
-        <p>
-          We believe that a great explanation should be available to a student in Lagos just as easily as one in London. Knowledge belongs to everyone.
-        </p>
-        <a href="#start" class="btn-primary" style="display:inline-block; margin-top: 12px;">Join the Movement</a>
+  <!-- TOPICS -->
+  <div class="topics-section">
+    <div class="section" style="padding-top:80px; padding-bottom:80px;">
+      <div class="reveal">
+        <div class="section-label">What You'll Learn</div>
+        <h2 class="section-title">Every subject.<br><em>No exceptions.</em></h2>
       </div>
-      <div class="mission-visual reveal">
-        <div class="mission-card">
-          <div class="mission-card-icon">🌍</div>
-          <div class="mission-card-num">150+</div>
-          <div class="mission-card-label">Countries Reached</div>
-        </div>
-        <div class="mission-card">
-          <div class="mission-card-icon">📱</div>
-          <div class="mission-card-num">< 5MB</div>
-          <div class="mission-card-label">Per Lesson</div>
-        </div>
-        <div class="mission-card">
-          <div class="mission-card-icon">🌐</div>
-          <div class="mission-card-num">12</div>
-          <div class="mission-card-label">Languages</div>
-        </div>
+      <div class="topics-flow reveal">
+        <div class="topic hi">⚗️ Chemistry</div>
+        <div class="topic">📐 Mathematics</div>
+        <div class="topic">🌍 World History</div>
+        <div class="topic hi">💻 Programming</div>
+        <div class="topic">🧬 Biology</div>
+        <div class="topic">🌌 Astronomy</div>
+        <div class="topic hi">💰 Personal Finance</div>
+        <div class="topic">⚡ Physics</div>
+        <div class="topic">🗣️ Languages</div>
+        <div class="topic">🎨 Art History</div>
+        <div class="topic hi">📊 Economics</div>
+        <div class="topic">🏛️ Philosophy</div>
+        <div class="topic">🌱 Environmental Science</div>
+        <div class="topic hi">🧠 Psychology</div>
+        <div class="topic">🎵 Music Theory</div>
+        <div class="topic">🏥 Health & Medicine</div>
+        <div class="topic">⚖️ Civics & Law</div>
+        <div class="topic">🚀 Engineering</div>
+        <div class="topic">📖 Literature</div>
+        <div class="topic hi">🌐 Geography</div>
+        <div class="topic">✍️ Essay Writing</div>
+        <div class="topic hi">📝 SAT / ACT Prep</div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- PRICING -->
-  <section id="pricing" style="padding-top: 0;">
-    <div class="reveal">
-      <div class="section-label">Pricing</div>
-      <h2 class="section-title">Free forever.<br><em>Seriously.</em></h2>
-    </div>
-    <div class="pricing-grid reveal">
-      <div class="price-card">
-        <div class="price-tag">Community</div>
-        <div class="price-name">Free</div>
-        <div class="price-amount">$0</div>
-        <div class="price-period">Always free, no credit card needed</div>
-        <ul class="price-features">
-          <li>Unlimited lessons across all subjects</li>
-          <li>Post-lesson quizzes</li>
-          <li>Basic learning paths</li>
-          <li>Available in 12 languages</li>
-          <li>Works on low bandwidth</li>
-        </ul>
-        <a href="#start" class="btn-price btn-price-light">Start Learning</a>
+  <!-- FOUNDER -->
+  <div class="founder-section" id="founder">
+    <div class="section">
+      <div class="reveal">
+        <div class="section-label">From the Founder</div>
+        <h2 class="section-title">Built by someone who<br><em>lived this mission.</em></h2>
       </div>
-      <div class="price-card featured">
-        <div class="price-tag">Pro Learner</div>
-        <div class="price-name">Plus</div>
-        <div class="price-amount">$4</div>
-        <div class="price-period">per month · cancel anytime</div>
-        <ul class="price-features">
-          <li>Everything in Free</li>
-          <li>Download for offline viewing</li>
-          <li>Advanced learning analytics</li>
-          <li>AI-powered learning paths</li>
-          <li>Priority access to new content</li>
-        </ul>
-        <a href="#start" class="btn-price btn-price-dark">Get Plus</a>
+      <div class="founder-grid">
+        <div class="founder-visual reveal">
+          <div class="founder-avatar">🎓</div>
+          <div class="founder-badge">
+            Sanjay
+            <span>Stanford University · Founder, OneTeach</span>
+          </div>
+        </div>
+        <div class="founder-text reveal">
+          <blockquote>"I built OneTeach because I believe that where you start should not determine where you end up. A great education is the single most powerful lever for changing that — and it should be free."</blockquote>
+          <p>I'm a student at <strong>Stanford University</strong>, one of the most competitive academic institutions in the world. Getting here took years of preparation, mentorship, and access to resources that I know not everyone has.</p>
+          <p>OneTeach is my way of making sure that the knowledge and guidance that helped me get to Stanford is <strong>available to every motivated student on earth</strong> — not just those who can afford $300/hour tutors or $2,000 test prep courses.</p>
+          <p>The free video lessons are just the beginning. I'm also personally available for <strong>one-on-one consultations</strong> — whether you need help with college essays, test prep strategy, academic subjects, or navigating the application process. And if cost is a barrier, just tell me. I'll make it work.</p>
+          <div class="founder-name">
+            <div>
+              <div class="founder-name-text">Sanjay · Founder</div>
+              <div class="founder-name-sub">Stanford University · sanjay01@stanford.edu</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <p style="margin-top: 24px; font-size: 0.82rem; color: var(--warm-mid); font-weight: 300;">
-      Plus revenue directly funds free access for students in lower-income regions. 🌱
-    </p>
-  </section>
+  </div>
+
+  <!-- OUTCOMES -->
+  <div class="outcomes-section">
+    <div class="outcomes-inner">
+      <div class="reveal">
+        <div class="section-label">Where OneTeach Can Take You</div>
+        <h2 class="section-title">This is your path<br><em>to the top.</em></h2>
+      </div>
+      <div class="outcomes-grid reveal">
+        <div class="outcome-card">
+          <div class="outcome-icon">🏛️</div>
+          <h3>Top University Admissions</h3>
+          <p>Master the academic content, essay craft, and application strategy needed to compete for spots at the world's most selective schools.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon">📊</div>
+          <h3>Test Score Breakthroughs</h3>
+          <p>SAT, ACT, AP exams — our focused micro-lessons build the subject mastery that translates directly into higher scores.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon">💡</div>
+          <h3>Academic Excellence</h3>
+          <p>Whether you're catching up or pushing ahead, one-minute lessons make complex concepts click — in any subject, at any level.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon">🌐</div>
+          <h3>Global Opportunity</h3>
+          <p>For students outside the US, OneTeach opens a window to international curricula, scholarship pathways, and global knowledge.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon">💼</div>
+          <h3>Career-Ready Skills</h3>
+          <p>Finance, coding, economics, communication — build the practical skills that employers and graduate programs actually want.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon">🔓</div>
+          <h3>Free. No Exceptions.</h3>
+          <p>Every single lesson. Every subject. Every learner. No paywalls, no premium tiers, no ads. This content exists to be used.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONSULT -->
+  <div class="consult-section" id="consult">
+    <div class="section">
+      <div class="reveal">
+        <div class="section-label">Work Directly With Sanjay</div>
+        <h2 class="section-title">One-on-one guidance<br>from a <em>Stanford student.</em></h2>
+      </div>
+      <div class="consult-grid">
+        <div class="consult-info reveal">
+          <p>The free lessons are for everyone. But if you want <strong>personalized guidance</strong> — help with your college essays, a test prep plan tailored to you, coaching through a tricky subject, or honest advice about the application process — I'm here.</p>
+          <p>I've been through it. I know what Stanford and schools like it are actually looking for. <span class="teal">And I believe every driven student deserves access to that kind of mentorship</span>, not just those who can afford it.</p>
+          <p>If cost is a barrier for you, just check the box in the form. I will always find a way to help.</p>
+
+          <div class="services">
+            <div class="service">
+              <div class="service-icon">✍️</div>
+              <div class="service-text">
+                <h4>College Essay Coaching</h4>
+                <p>Brainstorm, draft, and refine essays that genuinely stand out</p>
+              </div>
+            </div>
+            <div class="service">
+              <div class="service-icon">📝</div>
+              <div class="service-text">
+                <h4>SAT / ACT Strategy</h4>
+                <p>Targeted prep plans built around your timeline and weak spots</p>
+              </div>
+            </div>
+            <div class="service">
+              <div class="service-icon">🎓</div>
+              <div class="service-text">
+                <h4>Application Strategy</h4>
+                <p>School lists, timelines, activities, and positioning advice</p>
+              </div>
+            </div>
+            <div class="service">
+              <div class="service-icon">📚</div>
+              <div class="service-text">
+                <h4>Academic Subject Help</h4>
+                <p>One-on-one tutoring in any subject covered on OneTeach</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="consult-form reveal">
+          <div id="form-fields">
+            <div class="form-title">Send Sanjay a Note</div>
+            <div class="form-subtitle">He reads every message and responds personally.</div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" placeholder="Maya" />
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" placeholder="Johnson" />
+              </div>
+            </div>
+
+            <div class="form-group full">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" placeholder="you@email.com" />
+            </div>
+
+            <div class="form-group full">
+              <label for="country">Where are you based?</label>
+              <select id="country">
+                <option value="">Select your country…</option>
+                <option>United States</option>
+                <option>Nigeria</option>
+                <option>India</option>
+                <option>Kenya</option>
+                <option>Brazil</option>
+                <option>Indonesia</option>
+                <option>Philippines</option>
+                <option>Mexico</option>
+                <option>Bangladesh</option>
+                <option>Ethiopia</option>
+                <option>Pakistan</option>
+                <option>Ghana</option>
+                <option>Vietnam</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="form-group full">
+              <label for="service">What do you need help with?</label>
+              <select id="service">
+                <option value="">Choose a service…</option>
+                <option>College Essay Coaching</option>
+                <option>SAT / ACT Strategy &amp; Prep</option>
+                <option>Application Strategy &amp; School List</option>
+                <option>Academic Subject Tutoring</option>
+                <option>General Advice / Other</option>
+              </select>
+            </div>
+
+            <div class="form-group full">
+              <label for="message">Tell Sanjay about yourself &amp; your goals</label>
+              <textarea id="message" placeholder="Where are you in the process? What are you hoping to achieve? The more context the better…"></textarea>
+            </div>
+
+            <div class="checkbox-row">
+              <input type="checkbox" id="afford" />
+              <label for="afford" class="checkbox-label">
+                <strong>I cannot currently afford paid consultation.</strong> I'm checking this box to let Sanjay know — he is committed to helping every motivated learner regardless of financial situation.
+              </label>
+            </div>
+
+            <button class="btn-submit" onclick="submitForm()">Send My Note →</button>
+            <div class="form-note">Your message goes directly to sanjay01@stanford.edu · Replies within 48 hours</div>
+          </div>
+
+          <div class="form-success" id="form-success">
+            <div class="success-icon">🎉</div>
+            <h3>Message sent!</h3>
+            <p>Thank you for reaching out. Sanjay reads every note personally and will be in touch within 48 hours.<br><br>In the meantime, start exploring the free lessons below!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- CTA -->
-  <div class="cta-banner" id="start">
-    <h2>Your first lesson<br>is <em>60 seconds away.</em></h2>
-    <p>No account required. Just pick a topic and start learning right now.</p>
+  <div class="cta-section" id="start">
+    <h2>Your first lesson is<br><em>60 seconds away.</em></h2>
+    <p>No signup. No credit card. No catch. Pick a topic and start learning right now — free, forever.</p>
     <a href="#" class="btn-primary">Explore All Lessons →</a>
+    <div class="cta-free-note">100% free · No account required · Works on any device · 150+ countries</div>
   </div>
 
   <!-- FOOTER -->
   <footer>
-    <a href="#" class="footer-logo">One<span>Teach</span></a>
+    <a href="#" class="footer-logo">
+      <span style="color:var(--teal)">One</span><span style="color:var(--ink)">Teach</span>
+    </a>
     <ul class="footer-links">
       <li><a href="#">About</a></li>
-      <li><a href="#">Mission</a></li>
-      <li><a href="#">For Schools</a></li>
-      <li><a href="#">Blog</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Privacy</a></li>
+      <li><a href="#gap">The Mission</a></li>
+      <li><a href="#founder">Founder</a></li>
+      <li><a href="#consult">Consultations</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="mailto:sanjay01@stanford.edu">Contact</a></li>
     </ul>
-    <span class="footer-copy">© 2025 OneTeach. All rights reserved.</span>
+    <span class="footer-copy">© 2025 OneTeach · Knowledge for everyone · sanjay01@stanford.edu</span>
   </footer>
 
   <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
     // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          setTimeout(() => entry.target.classList.add('visible'), i * 90);
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
 
-    // Nav shadow on scroll
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      nav.style.boxShadow = window.scrollY > 20 ? '0 2px 24px rgba(15,14,12,0.08)' : 'none';
-    });
+    // Form submit — opens mailto
+    function submitForm() {
+      const fname   = document.getElementById('fname').value.trim();
+      const lname   = document.getElementById('lname').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const country = document.getElementById('country').value;
+      const service = document.getElementById('service').value;
+      const message = document.getElementById('message').value.trim();
+      const afford  = document.getElementById('afford').checked;
+
+      if (!fname || !email || !service || !message) {
+        alert('Please fill in your name, email, service needed, and a message.');
+        return;
+      }
+
+      const subject = encodeURIComponent(`OneTeach Consultation Request — ${service}`);
+      const body = encodeURIComponent(
+        `Hi Sanjay,\n\nName: ${fname} ${lname}\nEmail: ${email}\nCountry: ${country || 'Not specified'}\nService: ${service}\nCannot afford paid consultation: ${afford ? 'Yes' : 'No'}\n\n---\n\n${message}\n\n---\nSent via OneTeach.`
+      );
+
+      window.location.href = `mailto:sanjay01@stanford.edu?subject=${subject}&body=${body}`;
+
+      // Show success
+      document.getElementById('form-fields').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    }
   </script>
 </body>
 </html>
