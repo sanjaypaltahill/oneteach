@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OneTeach — Learn Anything in Just 1 Minute</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #faf7f2;
+      --ink: #0f0e0c;
+      --warm-mid: #3d3730;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --terracotta: #c2643f;
+      --sage: #6a8f6e;
+      --off-white: #f3ede3;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 32px rgba(15,14,12,0.08);
+      --radius: 16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(250,247,242,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--gold); }
+
+    nav ul {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    nav a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--warm-mid);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--ink);
+      color: var(--cream) !important;
+      padding: 10px 22px;
+      border-radius: 100px;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold) !important;
+      color: var(--ink) !important;
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 85% 60%, rgba(194,100,63,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 30% 40% at 10% 70%, rgba(106,143,110,0.07) 0%, transparent 60%);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--off-white);
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      max-width: 900px;
+      margin-bottom: 12px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--warm-mid);
+      font-weight: 300;
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 16px 36px;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(15,14,12,0.18);
+    }
+
+    .btn-primary:hover {
+      background: var(--gold);
+      color: var(--ink);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      padding: 16px 36px;
+      border-radius: 100px;
+      border: 1.5px solid rgba(15,14,12,0.2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* minute card */
+    .minute-visual {
+      margin-top: 72px;
+      position: relative;
+      animation: fadeUp 0.7s 0.45s ease both;
+    }
+
+    .minute-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      box-shadow: 0 24px 80px rgba(15,14,12,0.12);
+      width: 340px;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    .video-thumb {
+      background: linear-gradient(135deg, #1a1512 0%, #2e2620 100%);
+      height: 190px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(201,168,76,0.1) 0%, transparent 70%);
+    }
+
+    .play-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.2s;
+    }
+
+    .play-btn:hover { transform: scale(1.1); cursor: pointer; }
+
+    .play-btn svg { margin-left: 4px; }
+
+    .duration-badge {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: var(--gold);
+      color: var(--ink);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 100px;
+      z-index: 1;
+    }
+
+    .card-body {
+      padding: 20px 22px 22px;
+    }
+
+    .card-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .progress-bar {
+      margin-top: 14px;
+      height: 3px;
+      background: var(--off-white);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 60%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 100px;
+      animation: progressAnim 2s 1.2s ease both;
+    }
+
+    @keyframes progressAnim {
+      from { width: 0%; }
+      to { width: 60%; }
+    }
+
+    /* floating chips */
+    .chips {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .chip {
+      position: absolute;
+      background: var(--card-bg);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      box-shadow: 0 4px 20px rgba(15,14,12,0.1);
+      white-space: nowrap;
+      animation: float 3s ease-in-out infinite alternate;
+    }
+
+    .chip-1 { top: 20px; left: -130px; animation-delay: 0s; color: var(--terracotta); }
+    .chip-2 { top: 80px; right: -140px; animation-delay: 0.8s; color: var(--sage); }
+    .chip-3 { bottom: 40px; left: -110px; animation-delay: 1.5s; color: var(--gold); }
+
+    @keyframes float {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-8px); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── STATS ── */
+    .stats {
+      background: var(--ink);
+      padding: 64px 48px;
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: rgba(250,247,242,0.55);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── HOW IT WORKS ── */
+    section {
+      padding: 100px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      max-width: 600px;
+      margin-bottom: 60px;
+    }
+
+    .section-title em { color: var(--gold); font-style: italic; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .step {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(201,168,76,0.08);
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+
+    .step:hover { transform: translateY(-4px); box-shadow: 0 12px 48px rgba(15,14,12,0.12); }
+    .step:hover::before { transform: scaleX(1); }
+
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: rgba(201,168,76,0.15);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .step-icon {
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+    }
+
+    .step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+
+    .step p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--warm-mid);
+      font-weight: 300;
+    }
+
+    /* ── TOPICS ── */
+    .topics-section {
+      background: var(--off-white);
+      padding: 100px 0;
+    }
+
+    .topics-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .topics-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .topic-pill {
+      background: var(--card-bg);
+      border-radius: 100px;
+      padding: 12px 24px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--warm-mid);
+      border: 1px solid rgba(15,14,12,0.08);
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+
+    .topic-pill:hover {
+      background: var(--ink);
+      color: var(--gold);
+      border-color: var(--ink);
+      transform: translateY(-2px);
+    }
+
+    .topic-pill.featured {
+      background: var(--gold);
+      color: var(--ink);
+      border-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ── MISSION ── */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .mission-grid { grid-template-columns: 1fr; }
+    }
+
+    .mission-text p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--warm-mid);
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    .mission-text p strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .mission-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .mission-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .mission-card:first-child {
+      grid-column: 1 / -1;
+      background: var(--ink);
+      color: var(--cream);
+    }
+
+    .mission-card-icon { font-size: 2rem; margin-bottom: 10px; }
+
+    .mission-card-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold);
+    }
+
+    .mission-card-label {
+      font-size: 0.8rem;
+      font-weight: 400;
+      opacity: 0.6;
+      margin-top: 4px;
+    }
+
+    .mission-card:first-child .mission-card-label { color: var(--cream); }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+    }
+
+    .price-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 40px 36px;
+      box-shadow: var(--shadow);
+      border: 1.5px solid rgba(15,14,12,0.07);
+      transition: transform 0.25s;
+    }
+
+    .price-card:hover { transform: translateY(-4px); }
+
+    .price-card.featured {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+    }
+
+    .price-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .price-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .price-card.featured .price-name { color: var(--cream); }
+
+    .price-amount {
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--gold);
+      line-height: 1;
+      margin: 20px 0 8px;
+    }
+
+    .price-period {
+      font-size: 0.85rem;
+      color: var(--warm-mid);
+      margin-bottom: 28px;
+    }
+
+    .price-card.featured .price-period { color: rgba(250,247,242,0.55); }
+
+    .price-features {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+
+    .price-features li {
+      font-size: 0.875rem;
+      font-weight: 300;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(15,14,12,0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--warm-mid);
+    }
+
+    .price-card.featured .price-features li {
+      color: rgba(250,247,242,0.75);
+      border-bottom-color: rgba(250,247,242,0.08);
+    }
+
+    .price-features li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .btn-price {
+      width: 100%;
+      padding: 14px;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    .btn-price-light {
+      background: var(--off-white);
+      color: var(--ink);
+      border: 1.5px solid rgba(15,14,12,0.12);
+    }
+
+    .btn-price-light:hover {
+      background: var(--ink);
+      color: var(--gold);
+      border-color: var(--ink);
+    }
+
+    .btn-price-dark {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .btn-price-dark:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: var(--ink);
+      margin: 0 48px 80px;
+      border-radius: 24px;
+      padding: 80px 64px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 20% 50%, rgba(201,168,76,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 80% 50%, rgba(194,100,63,0.08) 0%, transparent 60%);
+    }
+
+    .cta-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .cta-banner h2 em { color: var(--gold); }
+
+    .cta-banner p {
+      color: rgba(250,247,242,0.6);
+      font-size: 1rem;
+      font-weight: 300;
+      max-width: 480px;
+      margin: 0 auto 36px;
+      position: relative;
+    }
+
+    .cta-banner .btn-primary {
+      position: relative;
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .cta-banner .btn-primary:hover {
+      background: var(--gold-light);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(250,247,242,0.06);
+      padding: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .footer-logo span { color: var(--gold); }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: rgba(250,247,242,0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: rgba(250,247,242,0.25);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      nav ul { display: none; }
+      section { padding: 72px 24px; }
+      .stats { padding: 48px 24px; gap: 40px; }
+      .cta-banner { margin: 0 24px 64px; padding: 56px 32px; }
+      footer { padding: 36px 24px; flex-direction: column; align-items: flex-start; }
+      .chip { display: none; }
+      .topics-inner { padding: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">One<span>Teach</span></a>
+    <ul>
+      <li><a href="#how">How it Works</a></li>
+      <li><a href="#topics">Topics</a></li>
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#start" class="nav-cta">Get Started</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+
+    <div class="hero-badge">Now available globally</div>
+
+    <h1>Learn <em>anything</em><br>in just 1 minute.</h1>
+    <p class="hero-sub">
+      OneTeach delivers bite-sized, expert-crafted video lessons that make world-class education accessible to everyone — anywhere, anytime, for free.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#start" class="btn-primary">Start Learning Free</a>
+      <a href="#how" class="btn-secondary">See How It Works</a>
+    </div>
+
+    <div class="minute-visual">
+      <div class="chips">
+        <div class="chip chip-1">🧬 Biology</div>
+        <div class="chip chip-2">📐 Geometry</div>
+        <div class="chip chip-3">🌍 History</div>
+      </div>
+      <div class="minute-card">
+        <div class="video-thumb">
+          <div class="duration-badge">1:00</div>
+          <div class="play-btn">
+            <svg width="18" height="20" viewBox="0 0 18 20" fill="none">
+              <path d="M1 1L17 10L1 19V1Z" fill="#0f0e0c"/>
+            </svg>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Physics · Lesson 4</div>
+          <div class="card-title">Why does light bend through glass?</div>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">1,200+</div>
+      <div class="stat-label">One-Minute Lessons</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">80+</div>
+      <div class="stat-label">Subjects Covered</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">150+</div>
+      <div class="stat-label">Countries Reached</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">Free</div>
+      <div class="stat-label">Always, For Everyone</div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="reveal">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">One minute is all it<br>takes to <em>get it.</em></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-icon">🔍</div>
+        <h3>Pick a Topic</h3>
+        <p>Browse hundreds of subjects — from algebra and chemistry to history, coding, and economics. No signup required to explore.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-icon">▶️</div>
+        <h3>Watch in 60 Seconds</h3>
+        <p>Every lesson is exactly one minute. Concise, expert-made, and beautifully designed to make concepts click fast.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-icon">🧠</div>
+        <h3>Test Yourself</h3>
+        <p>After each video, a quick question locks in the concept. Learning science shows retrieval practice doubles retention.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-icon">📈</div>
+        <h3>Build Knowledge</h3>
+        <p>Follow curated learning paths through any subject. Stack lessons into real, lasting understanding — minute by minute.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOPICS -->
+  <div class="topics-section">
+    <div class="topics-inner">
+      <div class="reveal">
+        <div class="section-label">What You'll Learn</div>
+        <h2 class="section-title">Every subject.<br><em>Every level.</em></h2>
+      </div>
+      <div class="topics-grid reveal">
+        <div class="topic-pill featured">⚗️ Chemistry</div>
+        <div class="topic-pill">📐 Mathematics</div>
+        <div class="topic-pill">🌍 World History</div>
+        <div class="topic-pill featured">💻 Programming</div>
+        <div class="topic-pill">🧬 Biology</div>
+        <div class="topic-pill">🌌 Astronomy</div>
+        <div class="topic-pill">💰 Personal Finance</div>
+        <div class="topic-pill featured">⚡ Physics</div>
+        <div class="topic-pill">🗣️ Languages</div>
+        <div class="topic-pill">🎨 Art History</div>
+        <div class="topic-pill">📊 Economics</div>
+        <div class="topic-pill">🏛️ Philosophy</div>
+        <div class="topic-pill">🌱 Environmental Science</div>
+        <div class="topic-pill featured">🧠 Psychology</div>
+        <div class="topic-pill">🎵 Music Theory</div>
+        <div class="topic-pill">🏥 Health & Medicine</div>
+        <div class="topic-pill">⚖️ Law & Civics</div>
+        <div class="topic-pill">🚀 Engineering</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISSION -->
+  <section id="mission">
+    <div class="reveal">
+      <div class="section-label">Our Mission</div>
+      <h2 class="section-title">Education is a<br><em>right</em>, not a privilege.</h2>
+    </div>
+    <div class="mission-grid">
+      <div class="mission-text reveal">
+        <p>
+          <strong>Two billion people lack meaningful access to quality education.</strong> Not because they aren't curious or capable — but because books are expensive, schools are overcrowded, and internet data is scarce.
+        </p>
+        <p>
+          OneTeach was built to change that. Our one-minute lessons are lightweight, low-bandwidth, and free. Optimized for the phone in your pocket, wherever you are in the world.
+        </p>
+        <p>
+          We believe that a great explanation should be available to a student in Lagos just as easily as one in London. Knowledge belongs to everyone.
+        </p>
+        <a href="#start" class="btn-primary" style="display:inline-block; margin-top: 12px;">Join the Movement</a>
+      </div>
+      <div class="mission-visual reveal">
+        <div class="mission-card">
+          <div class="mission-card-icon">🌍</div>
+          <div class="mission-card-num">150+</div>
+          <div class="mission-card-label">Countries Reached</div>
+        </div>
+        <div class="mission-card">
+          <div class="mission-card-icon">📱</div>
+          <div class="mission-card-num">< 5MB</div>
+          <div class="mission-card-label">Per Lesson</div>
+        </div>
+        <div class="mission-card">
+          <div class="mission-card-icon">🌐</div>
+          <div class="mission-card-num">12</div>
+          <div class="mission-card-label">Languages</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" style="padding-top: 0;">
+    <div class="reveal">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Free forever.<br><em>Seriously.</em></h2>
+    </div>
+    <div class="pricing-grid reveal">
+      <div class="price-card">
+        <div class="price-tag">Community</div>
+        <div class="price-name">Free</div>
+        <div class="price-amount">$0</div>
+        <div class="price-period">Always free, no credit card needed</div>
+        <ul class="price-features">
+          <li>Unlimited lessons across all subjects</li>
+          <li>Post-lesson quizzes</li>
+          <li>Basic learning paths</li>
+          <li>Available in 12 languages</li>
+          <li>Works on low bandwidth</li>
+        </ul>
+        <a href="#start" class="btn-price btn-price-light">Start Learning</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-tag">Pro Learner</div>
+        <div class="price-name">Plus</div>
+        <div class="price-amount">$4</div>
+        <div class="price-period">per month · cancel anytime</div>
+        <ul class="price-features">
+          <li>Everything in Free</li>
+          <li>Download for offline viewing</li>
+          <li>Advanced learning analytics</li>
+          <li>AI-powered learning paths</li>
+          <li>Priority access to new content</li>
+        </ul>
+        <a href="#start" class="btn-price btn-price-dark">Get Plus</a>
+      </div>
+    </div>
+    <p style="margin-top: 24px; font-size: 0.82rem; color: var(--warm-mid); font-weight: 300;">
+      Plus revenue directly funds free access for students in lower-income regions. 🌱
+    </p>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner" id="start">
+    <h2>Your first lesson<br>is <em>60 seconds away.</em></h2>
+    <p>No account required. Just pick a topic and start learning right now.</p>
+    <a href="#" class="btn-primary">Explore All Lessons →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="footer-logo">One<span>Teach</span></a>
+    <ul class="footer-links">
+      <li><a href="#">About</a></li>
+      <li><a href="#">Mission</a></li>
+      <li><a href="#">For Schools</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+    <span class="footer-copy">© 2025 OneTeach. All rights reserved.</span>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Nav shadow on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.boxShadow = window.scrollY > 20 ? '0 2px 24px rgba(15,14,12,0.08)' : 'none';
+    });
+  </script>
+</body>
+</html>
